@@ -54,6 +54,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="7On-tW-8Qo" kind="show" id="R4L-w0-cX1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -67,7 +70,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1u-2l-4Uz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="-23"/>
+            <point key="canvasLocation" x="-357" y="-23"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HOH-NZ-9Fa">
@@ -99,7 +102,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="862" y="-23"/>
+            <point key="canvasLocation" x="780" y="-211"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="R3V-dx-dgB">
+            <objects>
+                <viewController id="7On-tW-8Qo" customClass="ViewController" customModule="Lab2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="37s-7j-KHN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="VID-lD-1ZI"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="L5e-bZ-J7W"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sVA-Ex-ioJ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="780" y="469"/>
         </scene>
     </scenes>
 </document>
