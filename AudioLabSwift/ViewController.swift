@@ -10,11 +10,14 @@ import UIKit
 import Metal
 
 
-let AUDIO_BUFFER_SIZE = 1024*4
+//let AUDIO_BUFFER_SIZE = 1024*4
 
+let AUDIO_BUFFER_SIZE = 7350
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var loudest: UILabel!
+    @IBOutlet weak var loudest2: UILabel!
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     lazy var graph:MetalGraph? = {
@@ -38,7 +41,7 @@ class ViewController: UIViewController {
         // just start up the audio model here
         audio.startMicrophoneProcessing(withFps: 10)
         //audio.startProcesingAudioFileForPlayback()
-        audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
+//        audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
         audio.play()
         
         // run the loop for updating the graph peridocially
@@ -65,6 +68,8 @@ class ViewController: UIViewController {
             data: self.audio.timeData,
             forKey: "time"
         )
+        loudest.text = String(audio.max_l)
+        loudest2.text = String(audio.max_s)
         
     }
     

@@ -15,13 +15,17 @@ class AudioModel {
     private var BUFFER_SIZE:Int
     var timeData:[Float]
     var fftData:[Float]
-    
+//    var spectrum:[Float]
+    var max_l:Float
+    var max_s:Float
     // MARK: Public Methods
     init(buffer_size:Int) {
         BUFFER_SIZE = buffer_size
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        max_l = -9999.0000
+        max_s = -9999.0000
     }
     
     // public function for starting processing of microphone data
@@ -128,7 +132,24 @@ class AudioModel {
             // now take FFT and display it
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
-            
+//            var max_l = Float(-999.00000);
+//            var max_s = Float(-999.00000);
+            var queue:[Float] = []
+            for i in 0..<fftData.count {
+                if(i >= 10){
+                    queue.remove(at:0);
+                }
+                queue.append(fftData[i]);
+                if(i >= 10 && i < fftData.count - 10){
+                    if(queue[4] < queue[5] && queue[6] < queue[5]){
+                        max_l = max(max_l, queue[5])
+                        if(queue[5] < max_l) {
+                            max_s = max(max_s, queue[5])
+                        }
+                    }
+                }
+            }
+//            print("Toppest max tone:", max_l, "second max tone", max_s)
             
         }
     }
