@@ -24,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		97A5DBA6251A6993009DE750 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B65B5A5624F4409F00E74E73 /* Lab2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lab2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B5A5924F4409F00E74E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65B5A5B24F4409F00E74E73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 		B65B5A4D24F4409F00E74E73 = {
 			isa = PBXGroup;
 			children = (
+				97A5DBA6251A6993009DE750 /* README.md */,
 				B65B5A7E24F4798B00E74E73 /* Shaders.metal */,
 				B65B5A5824F4409F00E74E73 /* AudioLabSwift */,
 				B65B5A5724F4409F00E74E73 /* Products */,
