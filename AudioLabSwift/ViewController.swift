@@ -14,7 +14,10 @@ let AUDIO_BUFFER_SIZE = 1024*4
 
 
 class ViewController: UIViewController {
-
+    
+    
+    @IBOutlet var label1: UILabel!
+    @IBOutlet var label2: UILabel!
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     lazy var graph:MetalGraph? = {
@@ -38,7 +41,7 @@ class ViewController: UIViewController {
         // just start up the audio model here
         audio.startMicrophoneProcessing(withFps: 10)
         //audio.startProcesingAudioFileForPlayback()
-        audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
+        //audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
         audio.play()
         
         // run the loop for updating the graph peridocially

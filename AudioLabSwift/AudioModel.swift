@@ -16,6 +16,9 @@ class AudioModel {
     var timeData:[Float]
     var fftData:[Float]
     
+    
+   
+    
     // MARK: Public Methods
     init(buffer_size:Int) {
         BUFFER_SIZE = buffer_size

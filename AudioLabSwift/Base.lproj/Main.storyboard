@@ -104,7 +104,7 @@
                                 <color key="textColor" systemColor="secondarySystemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvF-Od-YuB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="label1" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvF-Od-YuB">
                                 <rect key="frame" x="283" y="693" width="10.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="secondarySystemBackgroundColor"/>
@@ -138,8 +138,16 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IAl-Pv-Pqq" secondAttribute="bottom" constant="98" id="u0k-QG-5Fh"/>
                             <constraint firstItem="B0M-3O-09W" firstAttribute="leading" secondItem="IAl-Pv-Pqq" secondAttribute="trailing" constant="-76" id="wlF-yJ-rtz"/>
                         </constraints>
+                        <connections>
+                            <outlet property="label1" destination="yvF-Od-YuB" id="XrN-VG-Aro"/>
+                            <outlet property="label2" destination="B0M-3O-09W" id="3mJ-Vw-2EL"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="fop-em-8Gv"/>
+                    <connections>
+                        <outlet property="label1" destination="yvF-Od-YuB" id="Sqi-t9-ekH"/>
+                        <outlet property="label2" destination="B0M-3O-09W" id="EaM-bt-Zj5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
