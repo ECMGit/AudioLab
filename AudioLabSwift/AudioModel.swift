@@ -55,6 +55,9 @@ class AudioModel {
         self.audioManager?.play()
     }
     
+    func audioPause(){
+        self.audioManager?.pause()
+    }
     // Here is an example function for getting the maximum frequency
     func getMaxFrequencyMagnitude() -> (Float,Float){
         // this is the slow way of getting the maximum...
