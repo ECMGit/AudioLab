@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  lab2
+//  AudioLabSwift
 //
-//  Created by 沈俊豪 on 9/15/20.
-//  Copyright © 2020 SMU_IOS. All rights reserved.
+//  Created by Eric Larson 
+//  Copyright © 2020 Eric Larson. All rights reserved.
 //
 
 import UIKit
