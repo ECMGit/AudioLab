@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         // just start up the audio model here
         audio.startMicrophoneProcessing(withFps: 10)
         //audio.startProcesingAudioFileForPlayback()
-//        audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
+        audio.startProcessingSinewaveForPlayback(withFreq: 0) // TODO: TAKE OUT LATER WHEN SECOND VIEW CONTROLLER USES NEW AUDIOMODEL.
         audio.play()
         
         // run the loop for updating the graph peridocially
@@ -68,8 +68,8 @@ class ViewController: UIViewController {
             data: self.audio.timeData,
             forKey: "time"
         )
-        loudest.text = String(audio.max_l)
-        loudest2.text = String(audio.max_s)
+        loudest.text = String(audio.index_l * 6)
+        loudest2.text = String(audio.index_s * 6)
         
     }
     

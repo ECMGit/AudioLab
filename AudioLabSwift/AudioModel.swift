@@ -22,6 +22,8 @@ class AudioModel {
 //    var spectrum:[Float]
     var max_l:Float
     var max_s:Float
+    var index_l:Int
+    var index_s:Int
     // MARK: Public Methods
     init(buffer_size:Int) {
         BUFFER_SIZE = buffer_size
@@ -30,6 +32,8 @@ class AudioModel {
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         max_l = -9999.0000
         max_s = -9999.0000
+        index_l = 0
+        index_s = 0
     }
     
     // public function for starting processing of microphone data
@@ -140,15 +144,22 @@ class AudioModel {
 //            var max_s = Float(-999.00000);
             var queue:[Float] = []
             for i in 0..<fftData.count {
+                
                 if(i >= 10){
                     queue.remove(at:0);
                 }
                 queue.append(fftData[i]);
                 if(i >= 10 && i < fftData.count - 10){
                     if(queue[4] < queue[5] && queue[6] < queue[5]){
-                        max_l = max(max_l, queue[5])
+                        if(queue[5] > max_l){
+                            max_l = max(max_l, queue[5])
+                            index_l = i - 5
+                        }
                         if(queue[5] < max_l) {
+                            if(queue[5] > max_s){
                             max_s = max(max_s, queue[5])
+                            index_s = i - 5
+                            }
                         }
                     }
                 }
