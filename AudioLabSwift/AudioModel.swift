@@ -30,8 +30,8 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
-        max_l = -9999.0000
-        max_s = -9999.0000
+        max_l = Float(-999.00000);
+        max_s = Float(-999.00000);
         index_l = 0
         index_s = 0
     }
@@ -140,30 +140,45 @@ class AudioModel {
             // now take FFT and display it
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
-//            var max_l = Float(-999.00000);
-//            var max_s = Float(-999.00000);
-            var queue:[Float] = []
-            for i in 0..<fftData.count {
-                
-                if(i >= 10){
-                    queue.remove(at:0);
-                }
-                queue.append(fftData[i]);
-                if(i >= 10 && i < fftData.count - 10){
-                    if(queue[4] < queue[5] && queue[6] < queue[5]){
-                        if(queue[5] > max_l){
-                            max_l = max(max_l, queue[5])
-                            index_l = i - 5
-                        }
-                        if(queue[5] < max_l) {
-                            if(queue[5] > max_s){
-                            max_s = max(max_s, queue[5])
-                            index_s = i - 5
-                            }
-                        }
-                    }
-                }
+
+            var max_array:UnsafeMutablePointer<Float>
+            let window_len = 40
+            let N = BUFFER_SIZE/2 - window_len + 1
+            max_array = UnsafeMutablePointer.allocate(capacity: BUFFER_SIZE/2 - window_len + 1)
+            vDSP_vswmax(fftData, 1, max_array, 1, UInt(N), UInt(window_len))
+            for i in 0..<N {
+                max_l = max(max_l, max_array[i])
+                if(max_array[i] < max_l){ max_s = max(max_s, max_array[i])}
             }
+            print("Loudest freq:", max_l, "2nd loudest freq", max_s)
+            for i in 0..<fftData.count{
+                // peak interpolation
+                if(fftData[i] == max_l){index_l = i}
+                if(fftData[i] == max_s){index_s = i}
+            }
+//            for i in 0..<fftData.count {
+//
+//                if(i >= 3){
+//                    queue.remove(at:0);
+//                }
+//                queue.append(fftData[i]);
+//                if(i >= 3 && i < fftData.count - 3){
+//                    if(queue[0] < queue[1] && queue[2] < queue[1]){
+//                        if(queue[1] > max_l){
+//                            max_s = max_l
+//                            index_s = index_l
+//                            max_l = max(max_l, queue[1])
+//                            index_l = (i - 1) * 2
+//                        }
+//                        if(queue[1] < max_l) {
+//                            if(queue[1] > max_s){
+//                            max_s = max(max_s, queue[1])
+//                            index_s = (i - 1) * 2
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 //            print("Toppest max tone:", max_l, "second max tone", max_s)
             
         }
