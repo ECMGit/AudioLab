@@ -11,6 +11,8 @@ import UIKit
 class Module2ViewController: UIViewController {
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     var slider_freq = Float(15000.00)
+    var zoom_index = Int(AUDIO_BUFFER_SIZE*15000/44100)
+    var zoom_array = [Float](repeating: 0, count: 100)
     lazy var graph:MetalGraph? = {
         return MetalGraph(mainView: self.view)
     }()
@@ -21,7 +23,7 @@ class Module2ViewController: UIViewController {
         // add in graphs for display
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
-                        numPointsInGraph: AUDIO_BUFFER_SIZE/2)
+                        numPointsInGraph: 100)
         
         graph?.addGraph(withName: "time",
             shouldNormalize: false,
@@ -44,6 +46,7 @@ class Module2ViewController: UIViewController {
     @IBAction func slider1(_ sender: UISlider) {
 
         slider_freq = sender.value
+        zoom_index = Int(AUDIO_BUFFER_SIZE*Int(slider_freq)/44100)
         audio.startProcessingSinewaveForPlayback(withFreq: slider_freq)
         audio.play()
     }
@@ -55,8 +58,10 @@ class Module2ViewController: UIViewController {
     
     @objc
     func updateGraph(){
+        NSLog("%d", zoom_index)
+        zoom_array = Array(self.audio.fftData[zoom_index-50...zoom_index+50])
         self.graph?.updateGraph(
-            data: self.audio.fftData,
+            data: zoom_array,
             forKey: "fft"
         )
         
@@ -66,5 +71,5 @@ class Module2ViewController: UIViewController {
         )
         
     }
-
+    
 }
