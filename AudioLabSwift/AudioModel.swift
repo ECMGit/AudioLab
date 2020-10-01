@@ -20,20 +20,24 @@ class AudioModel {
    
     
 //    var spectrum:[Float]
-    var max_l:Float
-    var max_s:Float
-    var index_l:Int
-    var index_s:Int
+    var max_1:Int // second loudest freq
+    var max_2:Int // loudest freq
+//    var max_3:Float // 3rd max value
+    var f_peak:Int // current freq
+    var f2:Int
+    var f1:Int
     // MARK: Public Methods
     init(buffer_size:Int) {
         BUFFER_SIZE = buffer_size
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
-        max_l = Float(-999.00000);
-        max_s = Float(-999.00000);
-        index_l = 0
-        index_s = 0
+        max_1 = 0
+        max_2 = 0
+//        max_3 = Float(-999.00000);
+        f1 = 0
+        f2 = 0
+        f_peak = 0
     }
     
     // public function for starting processing of microphone data
@@ -142,20 +146,38 @@ class AudioModel {
                                          andCopydBMagnitudeToBuffer: &fftData)
 
             var max_array:UnsafeMutablePointer<Float>
-            let window_len = 40
+            let window_len = 30
             let N = BUFFER_SIZE/2 - window_len + 1
             max_array = UnsafeMutablePointer.allocate(capacity: BUFFER_SIZE/2 - window_len + 1)
             vDSP_vswmax(fftData, 1, max_array, 1, UInt(N), UInt(window_len))
+            var m1 = Float(-9999.0)
+            var m2 = Float(-9999.0)
+            var m3 = Float(-9999.0)
             for i in 0..<N {
-                max_l = max(max_l, max_array[i])
-                if(max_array[i] < max_l){ max_s = max(max_s, max_array[i])}
+                m2 = max(max_array[i], m2)
             }
-            print("Loudest freq:", max_l, "2nd loudest freq", max_s)
+            
             for i in 0..<fftData.count{
                 // peak interpolation
-                if(fftData[i] == max_l){index_l = i}
-                if(fftData[i] == max_s){index_s = i}
+                if(fftData[i] == m2){
+                    f2 = i
+                    m1 = fftData[i - 1]
+                    m3 = fftData[i + 1]
+                    print("m1:", m1, " m2:", m2, " m3:", m3)
+                }
+                if(fftData[i] == m1){f1 = i}
             }
+//            var frequency = Float(f2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+//            print("Loudest freq:", f2, "2nd loudest freq", f1)
+//            if(max_3 < max_1 && max_2 > max_1){
+            let temp3 = Int((m1 - m3)*3/(m3 - 2*m2 + m1))
+            f_peak = f2*11 + temp3
+            max_2 = max(f_peak, max_2)
+            if(f_peak < max_2){max_1 = max(f_peak, max_1)}
+//            }
+            
+            
+            
 //            for i in 0..<fftData.count {
 //
 //                if(i >= 3){

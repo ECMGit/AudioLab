@@ -12,12 +12,13 @@ import Metal
 
 //let AUDIO_BUFFER_SIZE = 1024*4
 
-let AUDIO_BUFFER_SIZE = 12000
+let AUDIO_BUFFER_SIZE = 7350
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var loudest: UILabel!
     @IBOutlet weak var loudest2: UILabel!
+    @IBOutlet weak var toneFreq: UILabel!
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     lazy var graph:MetalGraph? = {
@@ -68,8 +69,9 @@ class ViewController: UIViewController {
             data: self.audio.timeData,
             forKey: "time"
         )
-        loudest.text = String(audio.index_l * 6)
-        loudest2.text = String(audio.index_s * 6)
+        loudest.text = String(audio.max_2)
+        loudest2.text = String(audio.max_1)
+        toneFreq.text = String(audio.f_peak)
         
     }
     
