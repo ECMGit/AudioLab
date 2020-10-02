@@ -172,10 +172,13 @@ class AudioModel {
             }
             
             let delta_f = Float(self.audioManager!.samplingRate)/Float(BUFFER_SIZE)
-            let temp = (m1 - m3)/(m3 - 2*m2 + m1) * (delta_f/2)
+            var temp = (m1 - m3)/(m3 - 2*m2 + m1) * (delta_f/2)
 //            print("m1:", m1, " m2:", m2, " m3:", m3, " temp", temp)
             let frequency = Float(f2*2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
             print("f2", f2," detected frequency:", frequency, " quadratic approximation", temp)
+            if temp.isNaN{
+                temp = 1
+            }
             f_peak = Int(frequency/1.11485 + temp) // current frequency
 
 //            if(m2 < max_l && m2 > max_s){
