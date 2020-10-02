@@ -69,8 +69,8 @@ class ViewController: UIViewController {
             data: self.audio.timeData,
             forKey: "time"
         )
-        loudest.text = String(audio.max_2)
-        loudest2.text = String(audio.max_1)
+        loudest.text = String(audio.loudest_freq)
+        loudest2.text = String(audio.loudest2_freq)
         toneFreq.text = String(audio.f_peak)
         
     }

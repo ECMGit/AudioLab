@@ -20,8 +20,11 @@ class AudioModel {
    
     
 //    var spectrum:[Float]
-    var max_1:Int // second loudest freq
-    var max_2:Int // loudest freq
+    var max_l:Float // loudest decibel
+    var max_s:Float // second loudest decibel
+    
+    var loudest_freq:Int
+    var loudest2_freq:Int
 //    var max_3:Float // 3rd max value
     var f_peak:Int // current freq
     var f2:Int
@@ -32,9 +35,10 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
-        max_1 = 0
-        max_2 = 0
-//        max_3 = Float(-999.00000);
+        max_s = 0
+        max_l = 0
+        loudest_freq = 0
+        loudest2_freq = 0
         f1 = 0
         f2 = 0
         f_peak = 0
@@ -167,18 +171,24 @@ class AudioModel {
                 if(fftData[i] == m1){f1 = i}
             }
             
-            
-//            var frequency = Float(f2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-//            print("Loudest freq:", f2, "2nd loudest freq", f1)
-//            if(max_3 < max_1 && max_2 > max_1){
             let delta_f = Float(self.audioManager!.samplingRate)/Float(BUFFER_SIZE)
             let temp = (m1 - m3)/(m3 - 2*m2 + m1) * (delta_f/2)
 //            print("m1:", m1, " m2:", m2, " m3:", m3, " temp", temp)
             let frequency = Float(f2*2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
             print("f2", f2," detected frequency:", frequency, " quadratic approximation", temp)
-            f_peak = Int(frequency/1.115 + temp)
-            max_2 = max(f_peak, max_2)
-            if(f_peak < max_2){max_1 = max(f_peak, max_1)}
+            f_peak = Int(frequency/1.11485 + temp) // current frequency
+
+//            if(m2 < max_l && m2 > max_s){
+//                max_s = max(m2, max_s)
+//                loudest2_freq = f_peak
+//            }
+            
+            if(m2 > max_l){
+                max_s = max_l
+                loudest2_freq = loudest_freq
+                loudest_freq = f_peak
+                max_l = m2
+            }
 //            }
             
             
