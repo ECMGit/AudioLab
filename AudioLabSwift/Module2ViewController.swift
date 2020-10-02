@@ -9,7 +9,7 @@
 import UIKit
 
 class Module2ViewController: UIViewController {
-    
+    var zoom = 0
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     var slider_freq = Float(15000.00)
     var zoom_index = Int(AUDIO_BUFFER_SIZE*15000/44100)/2 + 155
@@ -61,14 +61,32 @@ class Module2ViewController: UIViewController {
         print("Exit, audio pause.")
     }
     
+    @IBAction func zoom_toggle(_ sender: Any) {
+        if zoom == 0{
+            zoom = 1
+        }
+        else{
+            zoom = 0
+        }
+        NSLog("%d",zoom)
+    }
     @objc
     func updateGraph(){
         NSLog("%d", zoom_index)
         zoom_array = Array(self.audio.fftData[zoom_index-50...zoom_index+50])
-        self.graph?.updateGraph(
-            data: zoom_array,
-            forKey: "fft"
-        )
+        if zoom == 1{
+            self.graph?.updateGraph(
+                data: zoom_array,
+                forKey: "fft"
+            )
+        }
+        else{
+            self.graph?.updateGraph(
+                data: self.audio.fftData,
+                forKey: "fft"
+            )
+        }
+        
         
         self.graph?.updateGraph(
             data: self.audio.timeData,

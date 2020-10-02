@@ -204,13 +204,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stationary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncC-Tz-rYO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stationary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncC-Tz-rYO">
                                 <rect key="frame" x="142" y="729" width="78" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuQ-Og-jRY">
+                                <rect key="frame" x="253" y="724" width="90" height="30"/>
+                                <state key="normal" title="Zoom Toggle">
+                                    <color key="titleColor" systemColor="systemGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="zoom_toggle:" destination="7On-tW-8Qo" eventType="touchUpInside" id="qgu-yS-D94"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VID-lD-1ZI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -220,9 +228,13 @@
                             <constraint firstItem="CBG-h7-ECN" firstAttribute="leading" secondItem="VID-lD-1ZI" secondAttribute="leading" constant="20" id="8GP-Na-2qW"/>
                             <constraint firstItem="CBG-h7-ECN" firstAttribute="centerX" secondItem="VID-lD-1ZI" secondAttribute="centerX" id="9Yd-xB-4PT"/>
                             <constraint firstItem="ygv-XC-mox" firstAttribute="leading" secondItem="Ejq-VE-js1" secondAttribute="trailing" constant="36" id="EiD-Ee-2yj"/>
+                            <constraint firstItem="CBG-h7-ECN" firstAttribute="top" secondItem="vuQ-Og-jRY" secondAttribute="bottom" constant="33" id="RpY-jm-BSz"/>
                             <constraint firstItem="CBG-h7-ECN" firstAttribute="top" secondItem="Ejq-VE-js1" secondAttribute="bottom" constant="8" symbolic="YES" id="aQr-ur-AEr"/>
+                            <constraint firstItem="ncC-Tz-rYO" firstAttribute="leading" secondItem="rq3-D2-KrF" secondAttribute="trailing" constant="39" id="da2-aE-rEZ"/>
                             <constraint firstItem="VID-lD-1ZI" firstAttribute="bottom" secondItem="CBG-h7-ECN" secondAttribute="bottom" constant="45" id="dp4-QI-g0A"/>
+                            <constraint firstItem="ygv-XC-mox" firstAttribute="top" secondItem="ncC-Tz-rYO" secondAttribute="bottom" constant="8" symbolic="YES" id="kca-H2-pAs"/>
                             <constraint firstItem="Ejq-VE-js1" firstAttribute="leading" secondItem="VID-lD-1ZI" secondAttribute="leading" constant="20" id="n7i-Ep-Se1"/>
+                            <constraint firstItem="vuQ-Og-jRY" firstAttribute="leading" secondItem="ncC-Tz-rYO" secondAttribute="trailing" constant="33" id="t5f-YA-GzA"/>
                             <constraint firstItem="Ejq-VE-js1" firstAttribute="top" secondItem="rq3-D2-KrF" secondAttribute="bottom" constant="8" symbolic="YES" id="wBz-Wk-knM"/>
                             <constraint firstItem="VID-lD-1ZI" firstAttribute="trailing" secondItem="CBG-h7-ECN" secondAttribute="trailing" constant="20" id="zyt-zR-9c5"/>
                         </constraints>
@@ -247,6 +259,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
