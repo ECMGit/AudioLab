@@ -146,7 +146,7 @@ class AudioModel {
                                          andCopydBMagnitudeToBuffer: &fftData)
 
             var max_array:UnsafeMutablePointer<Float>
-            let window_len = 30
+            let window_len = 80
             let N = BUFFER_SIZE/2 - window_len + 1
             max_array = UnsafeMutablePointer.allocate(capacity: BUFFER_SIZE/2 - window_len + 1)
             vDSP_vswmax(fftData, 1, max_array, 1, UInt(N), UInt(window_len))
@@ -159,19 +159,24 @@ class AudioModel {
             
             for i in 0..<fftData.count{
                 // peak interpolation
-                if(fftData[i] == m2){
+                if(fftData[i] == m2 && i < fftData.count - 1 && i > 0){
                     f2 = i
                     m1 = fftData[i - 1]
                     m3 = fftData[i + 1]
-                    print("m1:", m1, " m2:", m2, " m3:", m3)
                 }
                 if(fftData[i] == m1){f1 = i}
             }
+            
+            
 //            var frequency = Float(f2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
 //            print("Loudest freq:", f2, "2nd loudest freq", f1)
 //            if(max_3 < max_1 && max_2 > max_1){
-            let temp3 = Int((m1 - m3)*3/(m3 - 2*m2 + m1))
-            f_peak = f2*11 + temp3
+            let delta_f = Float(self.audioManager!.samplingRate)/Float(BUFFER_SIZE)
+            let temp = (m1 - m3)/(m3 - 2*m2 + m1) * (delta_f/2)
+//            print("m1:", m1, " m2:", m2, " m3:", m3, " temp", temp)
+            let frequency = Float(f2*2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+            print("f2", f2," detected frequency:", frequency, " quadratic approximation", temp)
+            f_peak = Int(frequency/1.115 + temp)
             max_2 = max(f_peak, max_2)
             if(f_peak < max_2){max_1 = max(f_peak, max_1)}
 //            }
