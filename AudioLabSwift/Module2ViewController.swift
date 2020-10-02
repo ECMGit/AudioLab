@@ -9,12 +9,13 @@
 import UIKit
 
 class Module2ViewController: UIViewController {
+    
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     var slider_freq = Float(15000.00)
     var zoom_index = Int(AUDIO_BUFFER_SIZE*15000/44100)/2 + 155
     var zoom_array = [Float](repeating: 0, count: 100)
     @IBOutlet var Mod2Freq: UILabel!
-    
+    @IBOutlet var move_label: UILabel!
     lazy var graph:MetalGraph? = {
         return MetalGraph(mainView: self.view)
     }()
