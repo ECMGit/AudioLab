@@ -179,17 +179,41 @@
                                     <action selector="slider1:" destination="7On-tW-8Qo" eventType="valueChanged" id="6XQ-Gt-bQ0"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejq-VE-js1">
+                                <rect key="frame" x="20" y="758" width="86" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygv-XC-mox">
+                                <rect key="frame" x="142" y="758" width="130" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="Dt9-X2-zfX"/>
+                                    <constraint firstAttribute="height" constant="21" id="EuP-73-QTq"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="fTw-bt-BlP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="CBG-h7-ECN" firstAttribute="top" secondItem="ygv-XC-mox" secondAttribute="bottom" constant="8" symbolic="YES" id="0eh-u3-W00"/>
                             <constraint firstItem="CBG-h7-ECN" firstAttribute="leading" secondItem="VID-lD-1ZI" secondAttribute="leading" constant="20" id="8GP-Na-2qW"/>
                             <constraint firstItem="CBG-h7-ECN" firstAttribute="centerX" secondItem="VID-lD-1ZI" secondAttribute="centerX" id="9Yd-xB-4PT"/>
+                            <constraint firstItem="ygv-XC-mox" firstAttribute="leading" secondItem="Ejq-VE-js1" secondAttribute="trailing" constant="36" id="EiD-Ee-2yj"/>
+                            <constraint firstItem="CBG-h7-ECN" firstAttribute="top" secondItem="Ejq-VE-js1" secondAttribute="bottom" constant="8" symbolic="YES" id="aQr-ur-AEr"/>
                             <constraint firstItem="VID-lD-1ZI" firstAttribute="bottom" secondItem="CBG-h7-ECN" secondAttribute="bottom" constant="45" id="dp4-QI-g0A"/>
+                            <constraint firstItem="Ejq-VE-js1" firstAttribute="leading" secondItem="VID-lD-1ZI" secondAttribute="leading" constant="20" id="n7i-Ep-Se1"/>
                             <constraint firstItem="VID-lD-1ZI" firstAttribute="trailing" secondItem="CBG-h7-ECN" secondAttribute="trailing" constant="20" id="zyt-zR-9c5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VID-lD-1ZI"/>
                     </view>
                     <navigationItem key="navigationItem" id="L5e-bZ-J7W"/>
+                    <connections>
+                        <outlet property="Mod2Freq" destination="ygv-XC-mox" id="85A-zt-M3R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVA-Ex-ioJ" sceneMemberID="firstResponder"/>
             </objects>
