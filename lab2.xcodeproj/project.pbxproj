@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633AF25C2527E76400464A4E /* AnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633AF25A2527E50D00464A4E /* AnalyzerModel.swift */; };
 		950B09EE251D2D2800ECE3DC /* Module2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B09ED251D2D2800ECE3DC /* Module2ViewController.swift */; };
 		B65B5A5A24F4409F00E74E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B5A5924F4409F00E74E73 /* AppDelegate.swift */; };
 		B65B5A5C24F4409F00E74E73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B5A5B24F4409F00E74E73 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		633AF25A2527E50D00464A4E /* AnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzerModel.swift; sourceTree = "<group>"; };
 		950B09ED251D2D2800ECE3DC /* Module2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module2ViewController.swift; sourceTree = "<group>"; };
 		97A5DBA6251A6993009DE750 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B65B5A5624F4409F00E74E73 /* Lab2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lab2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				950B09ED251D2D2800ECE3DC /* Module2ViewController.swift */,
 				B65B5A8024F4AAB800E74E73 /* MetalGraph.swift */,
 				B65B5A7924F4523C00E74E73 /* AudioModel.swift */,
+				633AF25A2527E50D00464A4E /* AnalyzerModel.swift */,
 				B65B5A5F24F4409F00E74E73 /* Main.storyboard */,
 				B65B5A6224F440A100E74E73 /* Assets.xcassets */,
 				B65B5A6424F440A100E74E73 /* LaunchScreen.storyboard */,
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B65B5A7A24F4523C00E74E73 /* AudioModel.swift in Sources */,
+				633AF25C2527E76400464A4E /* AnalyzerModel.swift in Sources */,
 				B65B5A7824F444CE00E74E73 /* CircularBuffer.m in Sources */,
 				B65B5A7324F443A400E74E73 /* AudioFileReader.m in Sources */,
 				B65B5A7024F440D600E74E73 /* Novocaine.m in Sources */,
@@ -335,14 +339,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F69WJ27LN4;
+				DEVELOPMENT_TEAM = AZ424R698T;
 				INFOPLIST_FILE = AudioLabSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SMU.AudioLabSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = SMU.CJAudio;
 				PRODUCT_NAME = Lab2;
 				SWIFT_OBJC_BRIDGING_HEADER = "AudioLabSwift/AudioLabSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -357,14 +361,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F69WJ27LN4;
+				DEVELOPMENT_TEAM = AZ424R698T;
 				INFOPLIST_FILE = AudioLabSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SMU.AudioLabSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = SMU.CJAudio;
 				PRODUCT_NAME = Lab2;
 				SWIFT_OBJC_BRIDGING_HEADER = "AudioLabSwift/AudioLabSwift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

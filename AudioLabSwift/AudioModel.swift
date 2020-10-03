@@ -16,7 +16,7 @@ class AudioModel {
     var timeData:[Float]
     var fftData:[Float]
     
-    
+    var analyzer:AnalyzerModel
    
     
 //    var spectrum:[Float]
@@ -42,6 +42,8 @@ class AudioModel {
         f1 = 0
         f2 = 0
         f_peak = 0
+        
+        analyzer = AnalyzerModel(buffer_size: BUFFER_SIZE)
     }
     
     // public function for starting processing of microphone data
@@ -149,78 +151,7 @@ class AudioModel {
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
 
-            var max_array:UnsafeMutablePointer<Float>
-            let window_len = 80
-            let N = BUFFER_SIZE/2 - window_len + 1
-            max_array = UnsafeMutablePointer.allocate(capacity: BUFFER_SIZE/2 - window_len + 1)
-            vDSP_vswmax(fftData, 1, max_array, 1, UInt(N), UInt(window_len))
-            var m1 = Float(-9999.0)
-            var m2 = Float(-9999.0)
-            var m3 = Float(-9999.0)
-            for i in 0..<N {
-                m2 = max(max_array[i], m2)
-            }
-            
-            
-            for i in 0..<fftData.count{
-                // peak interpolation
-                if(fftData[i] == m2 && i < fftData.count - 1 && i > 0){
-                    f2 = i
-                    m1 = fftData[i - 1]
-                    m3 = fftData[i + 1]
-                }
-                if(fftData[i] == m1){f1 = i}
-            }
-            
-            let delta_f = Float(self.audioManager!.samplingRate)/Float(BUFFER_SIZE)
-            var temp = (m1 - m3)/(m3 - 2*m2 + m1) * (delta_f/2)
-//            print("m1:", m1, " m2:", m2, " m3:", m3, " temp", temp)
-            let frequency = Float(f2*2) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-            print("f2", f2," detected frequency:", frequency, " quadratic approximation", temp)
-            if temp.isNaN{
-                temp = 1
-            }
-            f_peak = Int(frequency/1.11485 + temp) // current frequency
-
-//            if(m2 < max_l && m2 > max_s){
-//                max_s = max(m2, max_s)
-//                loudest2_freq = f_peak
-//            }
-            
-            if(m2 > max_l){
-                max_s = max_l
-                loudest2_freq = loudest_freq
-                loudest_freq = f_peak
-                max_l = m2
-            }
-//            }
-            
-            
-            
-//            for i in 0..<fftData.count {
-//
-//                if(i >= 3){
-//                    queue.remove(at:0);
-//                }
-//                queue.append(fftData[i]);
-//                if(i >= 3 && i < fftData.count - 3){
-//                    if(queue[0] < queue[1] && queue[2] < queue[1]){
-//                        if(queue[1] > max_l){
-//                            max_s = max_l
-//                            index_s = index_l
-//                            max_l = max(max_l, queue[1])
-//                            index_l = (i - 1) * 2
-//                        }
-//                        if(queue[1] < max_l) {
-//                            if(queue[1] > max_s){
-//                            max_s = max(max_s, queue[1])
-//                            index_s = (i - 1) * 2
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            print("Toppest max tone:", max_l, "second max tone", max_s)
+            analyzer.getMaxFrequencies(fftData:fftData)
             
         }
     }
