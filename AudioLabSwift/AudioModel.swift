@@ -161,6 +161,7 @@ class AudioModel {
                 m2 = max(max_array[i], m2)
             }
             
+            
             for i in 0..<fftData.count{
                 // peak interpolation
                 if(fftData[i] == m2 && i < fftData.count - 1 && i > 0){

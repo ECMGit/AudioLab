@@ -12,8 +12,8 @@ class Module2ViewController: UIViewController {
     var zoom = 0
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     var slider_freq = Float(15000.00)
-    var zoom_index = Int(AUDIO_BUFFER_SIZE*15000/44100)/2 + 155
-    var zoom_array = [Float](repeating: 0, count: 100)
+    var zoom_index = Int(AUDIO_BUFFER_SIZE*15000/44100)/2 + 150
+    var zoom_array = [Float](repeating: 0, count: 160)
     @IBOutlet var Mod2Freq: UILabel!
     @IBOutlet var move_label: UILabel!
     lazy var graph:MetalGraph? = {
@@ -24,9 +24,10 @@ class Module2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // add in graphs for display
+        
         graph?.addGraph(withName: "fft",
                         shouldNormalize: true,
-                        numPointsInGraph: 100)
+                        numPointsInGraph: 160)
         
         graph?.addGraph(withName: "time",
             shouldNormalize: false,
@@ -47,10 +48,31 @@ class Module2ViewController: UIViewController {
     }
     
     @IBAction func slider1(_ sender: UISlider) {
-
         slider_freq = sender.value
-        zoom_index = Int((AUDIO_BUFFER_SIZE/2*Int(slider_freq)/44100) + 155)
+        zoom_index = Int(AUDIO_BUFFER_SIZE/2*Int(sender.value)/44100)  + 150
+        NSLog("Calculated: %d", zoom_index)
+        zoom_array = Array(self.audio.fftData[zoom_index-80...zoom_index+80])
+        var m2 = Float(-9999.0)
+//        for i in 500..<self.audio.fftData.count {
+//
+//            if self.audio.fftData[i] > m2{
+//                zoom_index = i
+//                m2 = self.audio.fftData[i]
+//            }
+//        }
+        var temp = 0
+        for i in 0..<zoom_array.count {
+
+            if zoom_array[i] > m2{
+                temp = i
+                m2 = zoom_array[i]
+            }
+        }
+        zoom_index = zoom_index - 80 + temp
+        
         NSLog("%d", zoom_index)
+        
+        
         Mod2Freq.text = String(slider_freq)
         audio.startProcessingSinewaveForPlayback(withFreq: slider_freq)
         audio.play()
@@ -61,31 +83,17 @@ class Module2ViewController: UIViewController {
         print("Exit, audio pause.")
     }
     
-    @IBAction func zoom_toggle(_ sender: Any) {
-        if zoom == 0{
-            zoom = 1
-        }
-        else{
-            zoom = 0
-        }
-        NSLog("%d",zoom)
-    }
+   
     @objc
     func updateGraph(){
-        NSLog("%d", zoom_index)
-        zoom_array = Array(self.audio.fftData[zoom_index-50...zoom_index+50])
-        if zoom == 1{
-            self.graph?.updateGraph(
-                data: zoom_array,
-                forKey: "fft"
-            )
-        }
-        else{
-            self.graph?.updateGraph(
-                data: self.audio.fftData,
-                forKey: "fft"
-            )
-        }
+        
+        
+        zoom_array = Array(self.audio.fftData[zoom_index-80...zoom_index+80])
+        self.graph?.updateGraph(
+            data: zoom_array,
+            forKey: "fft"
+        )
+
         
         
         self.graph?.updateGraph(
