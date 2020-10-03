@@ -76,4 +76,90 @@ class AnalyzerModel{
         
     }
     
+    public func freq2Tone(fq:Int)->String{
+        var s = ""
+        if(fq < 114 && fq >= 106){
+            s = "A2"
+        }else if(fq >= 114 && fq <= 120){
+            s = "A#2"
+        }else if(fq > 120 && fq <= 127){
+            s = "B2"
+        }else if(fq > 127 && fq <= 135){
+            s = "C3"
+        }else if(fq > 135 && fq <= 143){
+            s = "C#3"
+        }else if(fq > 143 && fq <= 151){
+            s = "D3"
+        }else if(fq > 151 && fq <= 160){
+            s = "D#3"
+        }else if(fq > 160 && fq <= 170){
+            s = "E3"
+        }else if(fq > 170 && fq <= 180){
+            s = "F3"
+        }else if(fq > 180 && fq <= 190){
+            s = "F#3"
+        }else if(fq > 190 && fq <= 202){
+            s = "G3"
+        }else if(fq > 202 && fq <= 214){
+            s = "G#3"
+        }else if(fq > 214 && fq <= 226){
+            s = "A3"
+        }else if(fq > 226 && fq <= 240){
+            s = "A#3"
+        }else if(fq > 240 && fq <= 254){
+            s = "B3"
+        }else if(fq > 254 && fq <= 270){
+            s = "C4"
+        }else if(fq > 270 && fq <= 285){
+            s = "C#4"
+        }else if(fq > 285 && fq <= 302){
+            s = "D4"
+        }else if(fq > 305 && fq <= 317){
+            s = "D#4"
+        }else if(fq > 320 && fq <= 340){
+            s = "E4"
+        }else if(fq > 340 && fq <= 360){
+            s = "F4"
+        }else if(fq > 360 && fq <= 380){
+            s = "F#4"
+        }else if(fq > 385 && fq <= 400){
+            s = "G4"
+        }else if(fq > 405 && fq <= 425){
+            s = "G#4"
+        }else if(fq > 430 && fq <= 450){
+            s = "A4"
+        }else if(fq > 460 && fq <= 475){
+            s = "A#4"
+        }else if(fq > 485 && fq <= 505){
+            s = "B4"
+        }else if(fq > 513 && fq <= 535){
+            s = "C5"
+        }else if(fq > 540 && fq <= 565){
+            s = "C#5"
+        }else if(fq > 577 && fq <= 597){
+            s = "D5"
+        }else if(fq > 615 && fq <= 632){
+            s = "D#5"
+        }else if(fq > 650 && fq <= 670){
+            s = "E5"
+        }else if(fq > 690 && fq <= 710){
+            s = "F5"
+        }else if(fq > 730 && fq <= 750){
+            s = "F#5"
+        }else if(fq > 775 && fq <= 795){
+            s = "G5"
+        }else if(fq > 820 && fq <= 841){
+            s = "G#5"
+        }else if(fq > 865 && fq <= 895){
+            s = "A5"
+        }else if(fq > 895){
+            s = "too high"
+        }else if(fq < 106){
+            s = "too low"
+        }else{
+            s = "too low or too high"
+        }
+        return s
+    }
+    
 }
