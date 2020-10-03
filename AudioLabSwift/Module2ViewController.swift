@@ -47,10 +47,33 @@ class Module2ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func detectMovement() {
+        var after_array = [Float](repeating: 0, count: 5)
+        var before_array = [Float](repeating: 0, count: 5)
+        
+        after_array = Array(self.audio.fftData[zoom_index-6...zoom_index-1])
+        before_array = Array(self.audio.fftData[zoom_index-6...zoom_index-1])
+        var sumAfter = after_array.reduce(0,+)
+        var sumBefore = before_array.reduce(0,+)
+        NSLog("After: %d Before: %d", sumAfter,sumBefore)
+        if sumAfter > sumBefore{
+            move_label.text = "Towards"
+        }
+        else if sumBefore > sumAfter{
+            move_label.text = "Away"
+        }
+        
+        else{
+            move_label.text = "Stationary"
+        }
+
+        
+    }
+    
     @IBAction func slider1(_ sender: UISlider) {
         slider_freq = sender.value
         zoom_index = Int(AUDIO_BUFFER_SIZE/2*Int(sender.value)/44100)  + 150
-        NSLog("Calculated: %d", zoom_index)
+//        NSLog("Calculated: %d", zoom_index)
         zoom_array = Array(self.audio.fftData[zoom_index-80...zoom_index+80])
         var m2 = Float(-9999.0)
 //        for i in 500..<self.audio.fftData.count {
@@ -70,7 +93,7 @@ class Module2ViewController: UIViewController {
         }
         zoom_index = zoom_index - 80 + temp
         
-        NSLog("%d", zoom_index)
+//        NSLog("%d", zoom_index)
         
         
         Mod2Freq.text = String(slider_freq)
@@ -89,6 +112,7 @@ class Module2ViewController: UIViewController {
         
         
         zoom_array = Array(self.audio.fftData[zoom_index-80...zoom_index+80])
+        detectMovement()
         self.graph?.updateGraph(
             data: zoom_array,
             forKey: "fft"
