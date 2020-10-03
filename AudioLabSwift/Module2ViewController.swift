@@ -51,15 +51,16 @@ class Module2ViewController: UIViewController {
         var after_array = [Float](repeating: 0, count: 5)
         var before_array = [Float](repeating: 0, count: 5)
         
-        after_array = Array(self.audio.fftData[zoom_index-6...zoom_index-1])
-        before_array = Array(self.audio.fftData[zoom_index-6...zoom_index-1])
+        after_array = Array(self.audio.fftData[zoom_index-8...zoom_index-3])
+        before_array = Array(self.audio.fftData[zoom_index+3...zoom_index+8])
         var sumAfter = after_array.reduce(0,+)
         var sumBefore = before_array.reduce(0,+)
         NSLog("After: %d Before: %d", sumAfter,sumBefore)
-        if sumAfter > sumBefore{
+        NSLog("Difference: %d", abs(sumAfter - sumBefore))
+        if abs(sumAfter - sumBefore) > 20{
             move_label.text = "Towards"
         }
-        else if sumBefore > sumAfter{
+        else if abs(sumBefore - sumAfter) > 20{
             move_label.text = "Away"
         }
         
