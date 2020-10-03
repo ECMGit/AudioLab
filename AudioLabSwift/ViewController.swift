@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var loudest: UILabel!
     @IBOutlet weak var loudest2: UILabel!
     @IBOutlet weak var toneFreq: UILabel!
+    @IBOutlet weak var loudest_tone: UILabel!
+    @IBOutlet weak var loudest_tone2: UILabel!
+    @IBOutlet weak var curr_tone: UILabel!
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     lazy var graph:MetalGraph? = {
@@ -52,6 +55,12 @@ class ViewController: UIViewController {
             repeats: true)
        
     }
+    @IBAction func resetValue(_ sender: UIButton) {
+        audio.analyzer.max_s = 0
+        audio.analyzer.max_l = 0
+        audio.analyzer.loudest_freq = 0
+        audio.analyzer.loudest2_freq = 0
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         audio.audioPause()
@@ -72,7 +81,9 @@ class ViewController: UIViewController {
         loudest.text = String(audio.analyzer.loudest_freq)
         loudest2.text = String(audio.analyzer.loudest2_freq)
         toneFreq.text = String(audio.analyzer.f_peak)
-        
+        loudest_tone.text = audio.analyzer.freq2Tone(fq:audio.analyzer.loudest_freq)
+        loudest_tone2.text = audio.analyzer.freq2Tone(fq:audio.analyzer.loudest2_freq)
+        curr_tone.text = audio.analyzer.freq2Tone(fq:audio.analyzer.f_peak)
     }
     
     

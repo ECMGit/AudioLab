@@ -145,7 +145,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B65B5A5124F4409F00E74E73 /* Build configuration list for PBXProject "lab2" */;
+			buildConfigurationList = B65B5A5124F4409F00E74E73 /* Build configuration list for PBXProject "Lab2" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -361,7 +361,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AZ424R698T;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				INFOPLIST_FILE = AudioLabSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -379,7 +379,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B65B5A5124F4409F00E74E73 /* Build configuration list for PBXProject "lab2" */ = {
+		B65B5A5124F4409F00E74E73 /* Build configuration list for PBXProject "Lab2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B65B5A6824F440A100E74E73 /* Debug */,
