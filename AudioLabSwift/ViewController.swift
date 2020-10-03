@@ -52,6 +52,12 @@ class ViewController: UIViewController {
             repeats: true)
        
     }
+    @IBAction func resetValue(_ sender: UIButton) {
+        audio.analyzer.max_s = 0
+        audio.analyzer.max_l = 0
+        audio.analyzer.loudest_freq = 0
+        audio.analyzer.loudest2_freq = 0
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         audio.audioPause()
