@@ -1,4 +1,3 @@
-#  CS7323 Lab2
-Audio Processing
+Audio Processing Application build on Novocaine
 
 
